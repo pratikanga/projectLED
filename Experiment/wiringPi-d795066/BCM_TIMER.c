@@ -2,18 +2,19 @@
 #include <stdio.h>
 #include <errno.h>
 
-int pin1 = 7;
-int pin2 = 5;
-int pin3 = ;
-int pin4 = ;
+int pin1 = 7; // GPIO-04 and pin-7
+int pin2 = 5; // GPIO-24 and pin-18
+int pin3 = 1; // GPIO-18 and pin-12
+int pin4 = 4; // GPIO-23 and pin-16
 
 int step = 0;
+void Start_Led_Cycle(int );
 
 void myInterrupt (void)
 {
     printf("\n Interrupt Code started Executing \n");
      
-    switch step
+    switch (step)
     {
         case 1 :
             Start_Led_Cycle(pin2);
@@ -28,6 +29,8 @@ void myInterrupt (void)
 	    step = 0;
 	    Start_Led_Cycle(pin1);
             break;
+        default :
+	    printf("\nSomething Wrong");
     }
 }
 
@@ -43,8 +46,6 @@ void Start_Led_Cycle (int pin_number)
 
 int main (void)
 {
-    int pin1 = 7;
-	
     printf("Raspberry Pi My Stepper motor LED test\n");
 
     if (wiringPiSetup() == -1)
