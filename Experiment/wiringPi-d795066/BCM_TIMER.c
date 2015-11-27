@@ -68,13 +68,13 @@ int main (void)
     {
         fprintf (stderr, "Unable to setup ISR: %s\n", strerror (errno)) ;
         return 1 ;
-			    }
+    }
 
     if (wiringPiISR (pin4, INT_EDGE_FALLING, &myInterrupt) < 0)
     {
         fprintf (stderr, "Unable to setup ISR: %s\n", strerror (errno)) ;
         return 1 ;
-    }			    }
+    }	
      
     pinMode(pin1, OUTPUT);
     pinMode(pin2, OUTPUT);
