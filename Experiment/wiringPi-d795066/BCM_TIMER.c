@@ -7,26 +7,31 @@ int pin2 = 5; // GPIO-24 and pin-18
 int pin3 = 1; // GPIO-18 and pin-12
 int pin4 = 4; // GPIO-23 and pin-16
 
-int step = 0;
+static int step = 0;
 void Start_Led_Cycle(int );
 
 void myInterrupt (void)
 {
-    printf("\n Interrupt Code started Executing \n");
+    step++;
+    printf("\n Interrupt Code started Executing %d \n",step);
      
     switch (step)
     {
         case 1 :
+            print("\n In Case 1 : Step : %d Pin 7 is turning on \n",step);
             Start_Led_Cycle(pin2);
 	    break;
 	case 2 :
-	    Start_Led_Cycle(pin3);
+            print("\n In Case 2 : Step : %d Pin 18 is turning on \n",step);
+            Start_Led_Cycle(pin3);
 	    break;
 	case 3 :
-	    Start_Led_Cycle(pin4);
+            print("\n In Case 3 : Step : %d Pin 12 is turning on \n",step);
+            Start_Led_Cycle(pin4);
 	    break;
 	case 4 :
-	    step = 0;
+            print("\n In Case 4 : Step : %d Pin 16 is turning on \n",step);
+            step = 0;
 	    Start_Led_Cycle(pin1);
             break;
         default :
@@ -36,7 +41,6 @@ void myInterrupt (void)
 
 void Start_Led_Cycle (int pin_number)
 {
-   step++;
    printf("Turning LED %d ON\n",pin_number);
    digitalWrite(pin_number, 1);
    delay(10000);
@@ -82,6 +86,8 @@ int main (void)
     pinMode(pin4, OUTPUT);
 
     Start_Led_Cycle(pin1);
+
+    while(1){}
 
     return 0;
 }
