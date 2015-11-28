@@ -46,28 +46,28 @@ void myInterrupt1( void )
 {
      step++;
      print("\n In Case 1 : Step : %d Pin 18 is turning on \n",step);
-     Start_Led_Cycle(pin2);
+     Start_Led_Cycle(pin2, delay);
 }
 
 void myInterrupt2(void)
 {
      step++;
      print("\n In Case 2 : Step : %d Pin 12 is turning on \n",step);
-     Start_Led_Cycle(pin3);
+     Start_Led_Cycle(pin3, delay);
 }
 
 void myInterrupt3(void)
 {
      step++;
      print("\n In Case 3 : Step : %d Pin 16 is turning on \n",step);
-     Start_Led_Cycle(pin4);
+     Start_Led_Cycle(pin4, delay);
 }
 
 void myInterrupt4(void)
 {
      step = 0;
      print("\n In Case 4 : Step : %d Pin 7 is turning on \n",step);
-     Start_Led_Cycle(pin1);
+     Start_Led_Cycle(pin1, delay);
 }
 
 void Start_Led_Cycle (int pin_number, int delay)
