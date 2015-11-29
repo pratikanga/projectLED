@@ -1,6 +1,7 @@
 #include <wiringPi.h>
 #include <stdio.h>
 #include <errno.h>
+#include <time.h>
 
 int pin1 = 7; // GPIO-04 and pin-7
 int pin2 = 5; // GPIO-24 and pin-18
@@ -45,36 +46,76 @@ void myInterrupt (void)
 void myInterrupt1( void )
 {
      step++;
-     print("\n In Case 1 : Step : %d Pin 18 is turning on \n",step);
-     Start_Led_Cycle(pin2, delay);
+     printf("\n In Case 1 : Step : %d Pin 18 is turning on \n",step);
+     if(digitalRead(pin1)) 
+     {
+         printf("\n START : CASE 1\n");
+         Start_Led_Cycle(pin2, timer);
+	 printf("\n END : CASE 1\n");
+     }
+     else
+     {
+         printf("\n Case 1 : Previos Pin is still On \n");
+     }
 }
+
 
 void myInterrupt2(void)
 {
      step++;
-     print("\n In Case 2 : Step : %d Pin 12 is turning on \n",step);
-     Start_Led_Cycle(pin3, delay);
+     printf("\n In Case 2 : Step : %d Pin 12 is turning on \n",step);
+
+     if(digitalRead(pin2))
+     {
+         printf("\n START : CASE 2\n");
+         Start_Led_Cycle(pin3, timer);
+         printf("\n END : CASE 2\n");
+     }
+     else 
+     {
+         printf("\n Case 2 : Previous Pin is Still On \n");
+     }
 }
 
 void myInterrupt3(void)
 {
      step++;
-     print("\n In Case 3 : Step : %d Pin 16 is turning on \n",step);
-     Start_Led_Cycle(pin4, delay);
+     printf("\n In Case 3 : Step : %d Pin 16 is turning on \n",step);
+     if(digitalRead(pin3))
+     {
+         printf("\n START : CASE 3\n");
+         Start_Led_Cycle(pin4, timer);
+         printf("\n END : CASE 3");
+     }
+     else
+     {
+         printf("\n Case 3 : Previous pin is still ON \n");
+     }
 }
 
 void myInterrupt4(void)
 {
      step = 0;
-     print("\n In Case 4 : Step : %d Pin 7 is turning on \n",step);
-     Start_Led_Cycle(pin1, delay);
+     printf("\n In Case 4 : Step : %d Pin 7 is turning on \n",step);
+
+     if(digitalRead(pin4))
+     {
+         printf("\n START : CASE 4\n");
+         Start_Led_Cycle(pin1, timer);
+	 printf("\n END : CASE 4\n");
+     }
+     else
+     {
+         printf("\n Case 4 : Previous pin is Still On \n");
+     }
 }
 
-void Start_Led_Cycle (int pin_number, int delay)
+void Start_Led_Cycle (int pin_number, int delay1)
 {
-   printf("Turning LED %d ON delay %d\n",pin_number,delay);
+   pinMode(pin_number, OUTPUT);
+   printf("Turning LED %d ON delay %d\n",pin_number,delay1);
    digitalWrite(pin_number, 1);
-   delay(delay);
+   delay(delay1);
    printf("Turning LED %d Off\n",pin_number);
    digitalWrite(pin_number, 0);
 }
